@@ -39,22 +39,14 @@ public:
 
 int main() {
     student billy("Billy");
-	float scores[] = {98, 89, 72, 69};
-	std::cout << "The first test was a " << *scores << ", and the "
-				 "fourth test was a " << *(scores + 3) << std::endl;
-	// let's set a fourloop to update billy's grades using scores
-	for (float * iter = scores; iter != scores + 4; iter++ ) { 
-		billy.grade_exam(*iter);
-	}
-	// alright now let's test to see if it worked
-	vector<float> billy_grades = billy.test_scores();
-	std::cout << "Billy's grades were: " << std::endl;
-	for (vector<float>::const_iterator iter = billy_grades.begin(); iter != billy_grades.end(); iter++) { 
-		std::cout << *iter << std::endl;
-	} 
-
-	//lastly, lets get billy's current grade
- 	std::cout << "Billy's current grade is a " << billy.current_grade() << std::endl;
+	billy.grade_exam(98);
+	billy.grade_exam(89);
+	billy.grade_exam(73);
+	billy.grade_exam(69);
+	std::vector<float> billys_grades = billy.test_scores();
+	for (size_t i = 0; i != billys_grades.size(); i++) { 
+		std::cout << billys_grades[i] << std::endl;
+	}	
     return 0;
 }
 
