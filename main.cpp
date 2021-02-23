@@ -7,16 +7,23 @@
 
 // only include headers needed for main()
 #include <iostream>
-#include "classroom.h"
+#include <fstream>
+#include <string>
+//#include "classroom.h"
 
-using std::vector;
-using std::string;
+using std::vector;		using std::string;
+using std::cout;		using std::endl;
+using std::ifstream;
 
 int main() {
-	student billy("Billy");
-	billy.grade_exam(98.0); billy.grade_exam(25.0); billy.grade_exam(98.0); billy.grade_exam(25.0);
-	vector<float> Tests = billy.test_scores();
-	std::cout << "Test average: " << (Tests[0] + Tests[1])/2 << std::endl;
+	string line;
+	ifstream myfile ("students.txt");
+	if (myfile.is_open()) { 
+		while ( getline(myfile,line) ) { 
+			cout << line << "\n";
+		}
+		myfile.close();
+	}
     return 0;
 }
 
