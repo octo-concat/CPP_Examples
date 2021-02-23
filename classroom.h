@@ -1,61 +1,60 @@
-//  classroom.hpp
-//  Classroom
+//  classroom.h
+//  Classroom Declaration File
 //
-//  Created by Seth Porter on 2/3/21.
+//  Created by Seth Porter and Jazmine Torres on 2/3/21.
 //  Copyright © 2021 Seth Porter. All rights reserved.
 //
 
+// Don't forget header guards!
 #ifndef classroom_h
 #define classroom_h
 
+#include <vector>
 #include <string>
+#include <sstream> 
 
-using std::string;
-using std::logic_error;
 using std::vector;
+using std::string;
+using std::stringstream;
 
-student::student(std::string n): name(n), grade(-1),
-                                 participation(-1), final_exam(-1) { }
+class student {
+private:
+    vector<float> Test;
+    float participation;
+    float final_exam;
+    string name;
+    float grade;
+	void update_grade();
+public:
+    student(): participation(-1), final_exam(-1), grade(-1) { }
+    student(string);
+    string student_name() const { return name; }
+    vector<float> test_scores() const { return Test;}
+    float final_exam_grade() const { return final_exam; }
+    float current_grade() { update_grade(); return grade; }
+	void print_grade() const;
+    bool is_grade() const { return grade >= 0; }
+    void grade_exam(float);
+    void grade_exam(int, float);
+};
 
-void student::print_grade() const {
-	if (is_grade()) {
-		std::cout << "has a " << grade << std::endl;
-	} else {
-		std::cout << "does not have a grade yet." << std::endl;
-	} // end if statement
-} // end print_grade()
+// declare classroom class for grading several students
+class classroom { 
+private:
+	// What private members do we need?
+	// Container of student objects
 
-void student::grade_exam(float test_grade) {
-	if (Test.size() != 4) { 
-		Test.push_back(test_grade); 
-	} else { 
-		string error = "Sorry, all test_grades are recorded"
-					   ", must specify which grade to change.";
-		throw logic_error(error);
-	} 
-} 
+private:
+	// what private methods do we need?
 
-void student::grade_exam(int testNumber, float test_grade) {
-	if ( test_grade <= Test.size() ) { 
-		Test[testNumber-1] = test_grade;
-	} else {
-		stringstream s1; s1 << testNumber;
-		stringstream s2; s2 << Test.size();
-		string error = "Index " + s1.str() + " is out of bounds, "
-					   "currently only " + s2.str() + " tests graded."; 
-		throw logic_error(error);
-	} 
-}
+public:
+	// what public methods do we need?
+	// read_grades(string) for reading a SDB file
+	// publish_grades() for outputting a SDB file
+	// find_student() for looking up a particular student's file
 
-void student::update_grade() { 
-	float total_pts(0), cur_pts(0);
-	if ( participation != -1) { total_pts += 0.1*100; cur_pts = 0.1*participation; }
-	if ( final_exam != -1) { total_pts += 0.3*100; cur_pts = 0.3*final_exam; }
-	for ( vector<float>::const_iterator it = Test.begin(); it != Test.end(); it++ ) { 
-		total_pts += 0.15*100;
-		cur_pts += 0.15 * *it;
-	}
-	grade = cur_pts / total_pts * 100;
-}
+};
 
-#endif /* classroom_h */
+#include "classroom_imp.h"
+
+#endif
