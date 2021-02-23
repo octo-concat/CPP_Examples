@@ -11,23 +11,12 @@
 #include <string>
 //#include "classroom.h"
 
-using std::vector;		using std::string;
+using std::string;
 using std::cout;		using std::endl;
 using std::ifstream;
 
 int main() {
-	string line;
-	ifstream myfile ("students.txt");
-	// if statement ensures there is a good open, should probably throw error if not
-	if (myfile.is_open()) { 
-		while ( getline(myfile,line) ) { 
-			cout << line << "\n";
-		}
-		myfile.close();
-	}
-	else {
-		cout << "Unable to open file" << endl;
-	}
+
     return 0;
 }
 
