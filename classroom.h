@@ -11,7 +11,8 @@
 
 #include <vector>
 #include <string>
-#include <sstream> 
+#include <sstream>
+#include <fstream> 
 
 using std::vector;
 using std::string;
@@ -41,11 +42,24 @@ public:
 // declare classroom class for grading several students
 class classroom { 
 private:
-	// What private members do we need?
+    // Constructor 
+	classroom()
+    {
+        string filename = "students.txt"
+        std::vector<std::string> students_container; // something's wrong here
+        std::string s_temp;
+
+        std::ifstream file(filename); //open the file
+        while(file >> s_temp)  //while file is open and still has info
+        {
+            students_container.push_back(s_temp); // appending info from txt file to students_container
+        }
+    }
+    // What private members do we need?
 	// Container of student objects
 
 private:
-	// what private methods do we need?
+	// what private methods do we need? - ignore this and come back to it later
 
 public:
 	// what public methods do we need?
